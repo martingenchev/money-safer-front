@@ -1,0 +1,27 @@
+<mat-card>
+  <form [formGroup]="userLogForm" novalidate>
+
+    <div formGroupName="emailGroup">
+      <mat-form-field>
+        <input matInput placeholder="Email address" type="email" formControlName="email">
+        <mat-error>
+          {{errorMessages.email}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div formGroupName="passwordGroup">
+      <mat-form-field>
+        <input matInput placeholder="Password" type="password" formControlName="password">
+        <mat-error>
+          {{errorMessages.password}}
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <button mat-raised-button [disabled]="userLogForm.invalid" (click)="Log_in()">Log in</button>
+
+  </form>
+  <p>No registration?  <a routerLink="/sign-up" > Sign up </a></p>
+</mat-card>
