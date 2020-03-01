@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidatorFn, Validators} from "@angular/forms";
-import {ErrorStateMatcher} from "@angular/material/core";
+import {ErrorStateMatcher} from '@angular/material/core';
+import {CountriesService} from '../services/countries.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +11,7 @@ import {ErrorStateMatcher} from "@angular/material/core";
 export class SignUpComponent implements OnInit {
 
   userRegistrationForm: FormGroup;
-
+  countriesList;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
 
   errorMessages: { [key: string]: string } = {
@@ -28,11 +29,22 @@ export class SignUpComponent implements OnInit {
   };
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private countriesService: CountriesService
   ) {
     this.createForm();
   }
   ngOnInit(): void {
+  this.getCountries();
+  }
+
+  getCountries(): void {
+    this.countriesService.getCountries().subscribe(data => {
+      this.countriesList = data;
+      console.log(data);
+    }, error => {
+      console.log('EBA MU MAMAMATA', error);
+    });
   }
   createForm() {
     this.userRegistrationForm = this.formBuilder.group({
@@ -73,7 +85,7 @@ export class SignUpComponent implements OnInit {
 
   register(): void {
     // API call to register your user
-    console.log(this.userRegistrationForm);
+    console.log(this.userRegistrationForm.value);
   }
 
 }

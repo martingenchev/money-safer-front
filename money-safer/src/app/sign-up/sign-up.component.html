@@ -60,6 +60,14 @@
         {{errorMessages.address}}
       </mat-error>
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>Country</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let country of countriesList" [value]="country.country_name">
+          {{country.country_name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   <button mat-raised-button [disabled]="userRegistrationForm.invalid" (click)="register()">Register</button>
 
   </form>
