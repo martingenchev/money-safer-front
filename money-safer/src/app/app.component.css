@@ -1,0 +1,13 @@
+nav{
+  display: flex;
+  justify-content: space-evenly;
+  height: 3rem;
+  align-items: center;
+  background: blue;
+}
+nav a{
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+}
+

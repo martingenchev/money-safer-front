@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -15,6 +15,15 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { ProfileComponent } from './profile/profile.component';
 import {CountriesService} from './services/countries.service';
 import {MatSelectModule} from '@angular/material/select';
+import {UserService} from './services/user.service';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {AuthService} from './services/auth.service';
+import {MatTableModule} from '@angular/material/table';
+import {AuthGuard} from './auth/auth.guard';
+import { HeaderComponent } from './header/header.component';
+import {AuthInterceptorService} from './auth/auth-interceptor.service';
+import { EditTransactionComponent } from './edit-transaction/edit-transaction.component';
 
 @NgModule({
   declarations: [
@@ -23,21 +32,30 @@ import {MatSelectModule} from '@angular/material/select';
     SignUpComponent,
     DashboardComponent,
     TransactionComponent,
-    ProfileComponent
+    ProfileComponent,
+    HeaderComponent,
+    EditTransactionComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
+    MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
     FormsModule,
     MatButtonModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRadioModule,
+    MatTableModule
   ],
-  providers: [CountriesService],
+  providers: [CountriesService, UserService, AuthService, AuthGuard,   {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

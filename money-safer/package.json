@@ -24,6 +24,7 @@
     "@nebular/eva-icons": "4.6.0",
     "@nebular/theme": "^4.6.0",
     "eva-icons": "^1.1.2",
+    "jwt-decode": "^2.2.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

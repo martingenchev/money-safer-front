@@ -1,1 +1,60 @@
-<p>profile works!</p>
+
+<mat-card>
+  <form [formGroup]="userRegistrationForm" novalidate>
+
+    <mat-form-field>
+      <input matInput placeholder="user name" value=" {{userData.username}}" type="text" formControlName="userName">
+      <mat-error>
+        {{errorMessages.fullName}}
+      </mat-error>
+    </mat-form-field>
+    <div formGroupName="nameGroup">
+      <mat-form-field>
+        <input matInput placeholder="first name" value="{{userData.first_name}} " type="text" formControlName="firstName">
+        <mat-error>
+          {{errorMessages.name}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="last name" value="{{userData.last_name}}" type="text" formControlName="lastName">
+        <mat-error>
+          {{errorMessages.lastName}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div formGroupName="passwordGroup">
+      <mat-form-field>
+        <input matInput placeholder="Password" type="password" formControlName="password">
+        <mat-error>
+          {{errorMessages.password}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Confirm password" type="password" formControlName="confirmPassword" [errorStateMatcher]="confirmValidParentMatcher">
+        <mat-error>
+          {{errorMessages.confirmPassword}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <mat-form-field>
+      <input matInput placeholder="{{userData.adress}}" type="text" formControlName="adress" [errorStateMatcher]="confirmValidParentMatcher">
+      <mat-error>
+        {{errorMessages.address}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{userData.Country.country_name}}</mat-label>
+      <mat-select formControlName="country_id">
+        <mat-option *ngFor="let country of countriesList" [value]="country.id">
+          {{country.country_name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button [disabled]="userRegistrationForm.invalid" (click)="updateUser()">Register</button>
+
+  </form>
+</mat-card>

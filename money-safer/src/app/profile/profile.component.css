@@ -1,0 +1,12 @@
+:host(app-profile){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+mat-card{
+  width:30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

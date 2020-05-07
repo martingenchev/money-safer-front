@@ -1,0 +1,15 @@
+:host(app-transaction){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+}
+mat-radio-group{
+  display: flex;
+  justify-content: space-evenly;
+}

@@ -1,1 +1,32 @@
-<p>transaction works!</p>
+
+
+<mat-card>
+  <form [formGroup]="transactionForm" novalidate>
+
+
+    <mat-form-field>
+      <input matInput placeholder="Insert Amount" type="text" formControlName="amounts" [errorStateMatcher]="confirmValidParentMatcher">
+      <mat-error>
+        {{errorMessages.amount}}
+      </mat-error>
+    </mat-form-field>
+
+
+      <mat-radio-group aria-label="Select an option" formControlName="transactionType">
+        <mat-radio-button value="1">Income</mat-radio-button>
+        <mat-radio-button value="2">Outcome</mat-radio-button>
+      </mat-radio-group>
+
+
+    <mat-form-field>
+      <mat-label>Country</mat-label>
+      <mat-select formControlName="transactionCategory">
+        <mat-option *ngFor="let category of transactionCategoriesList" [value]="category.id">
+          {{category.category_name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button [disabled]="transactionForm.invalid" (click)="InsertTransaction()">Insert Transaction</button>
+
+  </form>
+</mat-card>

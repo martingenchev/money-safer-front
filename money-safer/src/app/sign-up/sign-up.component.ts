@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidatorFn, Validators} from "@angular/forms";
 import {ErrorStateMatcher} from '@angular/material/core';
 import {CountriesService} from '../services/countries.service';
+import {UserService} from '../services/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,6 +15,15 @@ export class SignUpComponent implements OnInit {
   userRegistrationForm: FormGroup;
   countriesList;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
+  userObject = {
+    username: String,
+    first_name: String,
+    last_name: String,
+    password: String,
+    email: String,
+    adress: String,
+    country_id: Number
+  };
 
   errorMessages: { [key: string]: string } = {
     fullName: 'Full name must be between 1 and 128 characters',
@@ -30,7 +41,9 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private countriesService: CountriesService
+    private countriesService: CountriesService,
+    private userService: UserService,
+    private  router: Router ,
   ) {
     this.createForm();
   }
@@ -73,19 +86,37 @@ export class SignUpComponent implements OnInit {
       passwordGroup: this.formBuilder.group({
         password: ['', [
           Validators.required,
-          //Validators.pattern(this.regExps.password)
+          // Validators.pattern(this.regExps.password)
         ]],
         confirmPassword: ['', Validators.required]
       }, { validator: CustomValidators.childrenEqual}),
       adress: ['', [
         Validators.minLength(5),
       ]],
+      country_id: ['', [
+        Validators.required
+      ]]
     });
   }
 
   register(): void {
     // API call to register your user
     console.log(this.userRegistrationForm.value);
+
+    this.userObject.username = this.userRegistrationForm.value.userName;
+    this.userObject.first_name = this.userRegistrationForm.value.nameGroup.firstName;
+    this.userObject.last_name = this.userRegistrationForm.value.nameGroup.lastName;
+    this.userObject.password = this.userRegistrationForm.value.passwordGroup.password;
+    this.userObject.email = this.userRegistrationForm.value.emailGroup.email;
+    this.userObject.adress = this.userRegistrationForm.value.adress;
+    this.userObject.country_id = this.userRegistrationForm.value.country_id;
+    console.log(this.userObject);
+    this.userService.createUser(this.userObject).subscribe(resolve => {
+      console.log(resolve);
+      this.router.navigate(['/login']);
+    },  error => {
+      console.log(error);
+    })
   }
 
 }

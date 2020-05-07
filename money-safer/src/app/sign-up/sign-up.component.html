@@ -62,8 +62,8 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Country</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let country of countriesList" [value]="country.country_name">
+      <mat-select formControlName="country_id">
+        <mat-option *ngFor="let country of countriesList" [value]="country.id">
           {{country.country_name}}
         </mat-option>
       </mat-select>

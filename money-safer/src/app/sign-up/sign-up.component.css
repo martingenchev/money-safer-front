@@ -1,0 +1,6 @@
+:host(app-sign-up){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
