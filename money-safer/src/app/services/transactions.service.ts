@@ -43,6 +43,9 @@ export class TransactionsService {
       this.setTransactions(transactions);
     }));
   }
+  deleteTransaction(data: object): Observable<any> {
+    return this.http.post<any>(this.baseURL + 'delete-transaction' , data).pipe(catchError(this.handleError));
+  }
   handleError(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

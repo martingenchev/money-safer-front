@@ -110,6 +110,7 @@ export class SignUpComponent implements OnInit {
     this.userObject.email = this.userRegistrationForm.value.emailGroup.email;
     this.userObject.adress = this.userRegistrationForm.value.adress;
     this.userObject.country_id = this.userRegistrationForm.value.country_id;
+
     console.log(this.userObject);
     this.userService.createUser(this.userObject).subscribe(resolve => {
       console.log(resolve);

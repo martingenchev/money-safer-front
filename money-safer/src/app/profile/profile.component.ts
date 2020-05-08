@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidatorFn, Validators} from "@angular/forms";
-import {CustomValidators} from "../sign-up/sign-up.component";
-import {ErrorStateMatcher} from "@angular/material/core";
-import {CountriesService} from "../services/countries.service";
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidatorFn, Validators} from '@angular/forms';
+import {CustomValidators} from '../sign-up/sign-up.component';
+import {ErrorStateMatcher} from '@angular/material/core';
+import {CountriesService} from '../services/countries.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -20,7 +21,7 @@ export class ProfileComponent implements OnInit {
     first_name: String,
     last_name: String,
     password: String,
-    email: String,
+    newPassword: String,
     adress: String,
     country_id: Number
   };
@@ -37,19 +38,14 @@ export class ProfileComponent implements OnInit {
   };
   constructor( private userService: UserService,
                private countriesService: CountriesService,
-               private formBuilder: FormBuilder) {
-             this.createForm();
+               private formBuilder: FormBuilder,
+               private  router: Router) {
              this.userData = this.userService.getUsers();
-             this.userService.getUserdata().subscribe(resolve => {
-              this.userData = resolve;
-              console.log(this.userData);
-            }, err => {
-              console.log(err);
-            });
+             this.createForm();
+             console.log(this.userData);
   }
 
   ngOnInit() {
-
     this.getCountries();
   }
 
@@ -65,21 +61,25 @@ export class ProfileComponent implements OnInit {
 
   createForm() {
     this.userRegistrationForm = this.formBuilder.group({
-      userName: ['', [
-        Validators.required,
+      userName: [this.userData.username, [
         Validators.minLength(6),
         Validators.maxLength(20)
       ]],
       nameGroup: this.formBuilder.group({
-        firstName: ['', [
+        firstName: [this.userData.first_name, [
           Validators.minLength(1),
           Validators.maxLength(50)
         ]],
-        lastName: ['', [
+        lastName: [this.userData.last_name, [
           Validators.minLength(1),
           Validators.maxLength(50)
         ]],
       }),
+      Oldpassword: ['', [
+        Validators.required,
+        Validators.minLength(6),
+        // Validators.pattern(this.regExps.password)
+      ]],
       passwordGroup: this.formBuilder.group({
         password: ['', [
           Validators.required,
@@ -87,17 +87,30 @@ export class ProfileComponent implements OnInit {
         ]],
         confirmPassword: ['', Validators.required]
       }, { validator: CustomValidators.childrenEqual}),
-      adress: ['', [
+      adress: [this.userData.adress, [
         Validators.minLength(5),
       ]],
-      country_id: ['', [
-        Validators.required
-      ]]
+      country_id: [this.userData.Country.id, [ ]]
     });
   }
 
   updateUser() {
+    console.log(this.userRegistrationForm.value);
 
+    this.userObject.username = this.userRegistrationForm.value.userName;
+    this.userObject.first_name = this.userRegistrationForm.value.nameGroup.firstName;
+    this.userObject.last_name = this.userRegistrationForm.value.nameGroup.lastName;
+    this.userObject.password = this.userRegistrationForm.value.passwordGroup.password;
+    this.userObject.newPassword = this.userRegistrationForm.value.Oldpassword
+    this.userObject.adress = this.userRegistrationForm.value.adress;
+    this.userObject.country_id = this.userRegistrationForm.value.country_id;
+
+    this.userService.UpdateUser(this.userObject).subscribe( resolve =>{
+      console.log(resolve);
+      this.router.navigate(['/dashboard']);
+    }, error => {
+      console.log(error);
+    });
   }
 
 

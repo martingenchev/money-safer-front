@@ -10,7 +10,7 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import {DashboardComponent, DialogDeleteTransaction} from './dashboard/dashboard.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { ProfileComponent } from './profile/profile.component';
 import {CountriesService} from './services/countries.service';
@@ -24,6 +24,7 @@ import {AuthGuard} from './auth/auth.guard';
 import { HeaderComponent } from './header/header.component';
 import {AuthInterceptorService} from './auth/auth-interceptor.service';
 import { EditTransactionComponent } from './edit-transaction/edit-transaction.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { EditTransactionComponent } from './edit-transaction/edit-transaction.co
     ProfileComponent,
     HeaderComponent,
     EditTransactionComponent,
+    DialogDeleteTransaction
   ],
   imports: [
     BrowserModule,
@@ -49,8 +51,10 @@ import { EditTransactionComponent } from './edit-transaction/edit-transaction.co
     HttpClientModule,
     MatSelectModule,
     MatRadioModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
+  entryComponents: [DialogDeleteTransaction],
   providers: [CountriesService, UserService, AuthService, AuthGuard,   {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,

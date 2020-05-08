@@ -3,21 +3,21 @@
   <form [formGroup]="userRegistrationForm" novalidate>
 
     <mat-form-field>
-      <input matInput placeholder="user name" value=" {{userData.username}}" type="text" formControlName="userName">
+      <input matInput placeholder="Username" value=" {{userData.username}}" type="text" formControlName="userName">
       <mat-error>
         {{errorMessages.fullName}}
       </mat-error>
     </mat-form-field>
     <div formGroupName="nameGroup">
       <mat-form-field>
-        <input matInput placeholder="first name" value="{{userData.first_name}} " type="text" formControlName="firstName">
+        <input matInput placeholder="First name" value="{{userData.first_name}}" type="text" formControlName="firstName">
         <mat-error>
           {{errorMessages.name}}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="last name" value="{{userData.last_name}}" type="text" formControlName="lastName">
+        <input matInput placeholder="Last name" value="{{userData.last_name}}" type="text" formControlName="lastName">
         <mat-error>
           {{errorMessages.lastName}}
         </mat-error>
@@ -25,9 +25,16 @@
     </div>
 
 
+    <mat-form-field>
+      <input matInput placeholder="Current Password" type="password" formControlName="Oldpassword">
+      <mat-error>
+        {{errorMessages.password}}
+      </mat-error>
+    </mat-form-field>
     <div formGroupName="passwordGroup">
+      <br>
       <mat-form-field>
-        <input matInput placeholder="Password" type="password" formControlName="password">
+        <input matInput placeholder="New Password" type="password" formControlName="password">
         <mat-error>
           {{errorMessages.password}}
         </mat-error>
@@ -41,7 +48,7 @@
       </mat-form-field>
     </div>
     <mat-form-field>
-      <input matInput placeholder="{{userData.adress}}" type="text" formControlName="adress" [errorStateMatcher]="confirmValidParentMatcher">
+      <input matInput value="{{userData.adress}}" placeholder="Adress" type="text" formControlName="adress" [errorStateMatcher]="confirmValidParentMatcher">
       <mat-error>
         {{errorMessages.address}}
       </mat-error>
@@ -54,7 +61,8 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button [disabled]="userRegistrationForm.invalid" (click)="updateUser()">Register</button>
+    <br>
+    <button mat-raised-button [disabled]="userRegistrationForm.invalid" (click)="updateUser()">Update profile</button>
 
   </form>
 </mat-card>

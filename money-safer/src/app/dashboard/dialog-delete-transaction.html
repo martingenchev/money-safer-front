@@ -1,0 +1,8 @@
+<div mat-dialog-content>
+  <p>Are you sure that you want to remove this transaction {{data.id}}</p>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="deleteTransaction(data.id)" cdkFocusInitial>Ok</button>
+</div>
