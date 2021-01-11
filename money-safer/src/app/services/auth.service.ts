@@ -25,7 +25,6 @@ export class AuthService {
 
   removeToken(): boolean {
     localStorage.removeItem(TOKEN_NAME);
-    console.log('tuk');
     return true;
   }
 

@@ -4,7 +4,7 @@ import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validat
 import {CustomValidators} from '../sign-up/sign-up.component';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {CountriesService} from '../services/countries.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
   userData;
   userRegistrationForm: FormGroup;
   countriesList;
-
   userObject = {
     username: String,
     first_name: String,
@@ -101,11 +100,11 @@ export class ProfileComponent implements OnInit {
     this.userObject.first_name = this.userRegistrationForm.value.nameGroup.firstName;
     this.userObject.last_name = this.userRegistrationForm.value.nameGroup.lastName;
     this.userObject.password = this.userRegistrationForm.value.passwordGroup.password;
-    this.userObject.newPassword = this.userRegistrationForm.value.Oldpassword
+    this.userObject.newPassword = this.userRegistrationForm.value.Oldpassword;
     this.userObject.adress = this.userRegistrationForm.value.adress;
     this.userObject.country_id = this.userRegistrationForm.value.country_id;
 
-    this.userService.UpdateUser(this.userObject).subscribe( resolve =>{
+    this.userService.UpdateUser(this.userObject).subscribe( resolve => {
       console.log(resolve);
       this.router.navigate(['/dashboard']);
     }, error => {

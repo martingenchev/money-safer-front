@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, Subject, throwError} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
-import {User} from '../models/user';
-import {AuthService} from "./auth.service";
+import {AuthService} from './auth.service';
 
 
 @Injectable()
 export class UserService {
-
   private users: {} = [];
   constructor(private  http: HttpClient, private Auth: AuthService) { }
   baseURL = 'http://localhost:3000/api/users/' ;
@@ -22,15 +20,13 @@ export class UserService {
   }
 
   createUser(user: object): Observable<any> {
-    return  this.http.post<any>(this.baseURL + 'create-user', user).pipe(catchError(this.handleError));
+    return  this.http.post<object>(this.baseURL + 'create-user', user).
+    pipe(catchError(this.handleError));
   }
-
-
 
   getUserdata(): Observable<any> {
     return  this.http.get<any>(this.baseURL + 'getUserData').
     pipe(catchError(this.handleError), tap( userData => {
-
       this.setUser(userData);
     }));
   }
@@ -56,7 +52,6 @@ export class UserService {
       // server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(error, "tova");
     return throwError(error);
   }
 }

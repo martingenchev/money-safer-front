@@ -1,7 +1,6 @@
 <nav>
-
   <a routerLink="/profile" *ngIf="authService.IsLogged()" routerLinkActive="active">{{this.userData.username}}</a>
-  <a routerLink="/transactions" *ngIf="authService.IsLogged()" routerLinkActive="active">Add Transaction</a>
+  <a routerLink="/transactions" id="transactions" *ngIf="authService.IsLogged()" routerLinkActive="active">Add Transaction</a>
   <a routerLink="/dashboard" *ngIf="authService.IsLogged()" routerLinkActive="active">Dashboard</a>
   <a routerLink="/dashboard" *ngIf="authService.IsLogged()"  (click)="Logout()" routerLinkActive="active">Logout</a>
 </nav>

@@ -14,6 +14,7 @@ export class TransactionComponent implements OnInit {
   transactionForm: FormGroup;
   transactionCategoriesList;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
+
   Transaction = {
     transaction_type: Boolean,
     amount: Number,

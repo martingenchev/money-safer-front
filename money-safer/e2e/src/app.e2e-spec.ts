@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import {browser, by, element, logging} from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -8,9 +8,24 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('money-safer app is running!');
+  it('Login in the application', () => {
+    page.gateLogin('genchev.martin1@gmail.com' , 'genchev.martin1@gmail.com');
+    expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + 'dashboard');
+  });
+
+  it('Add transaction', () => {
+    element(by.css('#transactions')).click();
+    expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + 'transactions');
+    page.getByFormControlName('amounts').sendKeys(1000);
+    element(by.css('#inflow')).click();
+  });
+
+  it('Select type', () => {
+    element(by.css('#transactionCategory')).click();
+    element(by.cssContainingText('mat-option', 'Salary')).click();
+  });
+  it('Click', () => {
+    element(by.css('#InsertTransaction')).click();
   });
 
   afterEach(async () => {

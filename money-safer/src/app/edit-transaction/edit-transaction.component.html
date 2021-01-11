@@ -1,1 +1,31 @@
-<p>edit-transaction works! {{MAZALO}}</p>
+
+<mat-card>
+  <form [formGroup]="transactionForm" novalidate>
+
+
+    <mat-form-field>
+      <input matInput placeholder="Insert Amount" type="text" formControlName="amounts" [errorStateMatcher]="confirmValidParentMatcher">
+      <mat-error>
+        {{errorMessages.amount}}
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-radio-group aria-label="Select an option" formControlName="transactionType">
+      <mat-radio-button value="1">Inflow</mat-radio-button>
+      <mat-radio-button value="0">Outflow</mat-radio-button>
+    </mat-radio-group>
+
+
+    <mat-form-field>
+      <mat-label>Transaction type</mat-label>
+      <mat-select formControlName="transactionCategory">
+        <mat-option *ngFor="let category of transactionCategoriesList" [value]="category.id">
+          {{category.category_name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button [disabled]="transactionForm.invalid" (click)="updateTransaction()">Update Transaction</button>
+
+  </form>
+</mat-card>

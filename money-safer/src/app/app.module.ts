@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+  import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -21,10 +21,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {AuthService} from './services/auth.service';
 import {MatTableModule} from '@angular/material/table';
 import {AuthGuard} from './auth/auth.guard';
-import { HeaderComponent } from './header/header.component';
+import { MenuComponent } from './menu/menu.component';
 import {AuthInterceptorService} from './auth/auth-interceptor.service';
 import { EditTransactionComponent } from './edit-transaction/edit-transaction.component';
-import {MatDialogModule} from "@angular/material/dialog";
+import {MatDialogModule} from '@angular/material/dialog';
+import {TransactionsService} from './services/transactions.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     DashboardComponent,
     TransactionComponent,
     ProfileComponent,
-    HeaderComponent,
+    MenuComponent,
     EditTransactionComponent,
     DialogDeleteTransaction
   ],
@@ -55,7 +56,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatDialogModule
   ],
   entryComponents: [DialogDeleteTransaction],
-  providers: [CountriesService, UserService, AuthService, AuthGuard,   {
+  providers: [CountriesService, UserService, AuthService, AuthGuard, TransactionsService , {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,
     multi: true

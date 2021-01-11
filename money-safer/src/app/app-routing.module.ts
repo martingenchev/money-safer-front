@@ -7,9 +7,9 @@ import {ProfileComponent} from './profile/profile.component';
 import {TransactionComponent} from './transaction/transaction.component';
 import {AuthGuard} from './auth/auth.guard';
 import {TransactionResolverService} from './dashboard/transaction-resolver.service';
-import {UserResolverService} from './header/user-resolver.service';
-import {HeaderComponent} from './header/header.component';
-import {EditTransactionComponent} from "./edit-transaction/edit-transaction.component";
+import {UserResolverService} from './menu/user-resolver.service';
+import {MenuComponent} from './menu/menu.component';
+import {EditTransactionComponent} from './edit-transaction/edit-transaction.component';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
     pathMatch: 'full'
   }, {
     path: '',
-    component: HeaderComponent,
+    component: MenuComponent,
     resolve: [UserResolverService]
   },
   {

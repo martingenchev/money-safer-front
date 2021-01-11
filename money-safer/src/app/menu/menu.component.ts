@@ -1,11 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
+import {UserService} from '../services/user.service';
+import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.css']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class MenuComponent implements OnInit, OnDestroy {
   userData;
   private userSub: Subscription;
   isAuthenticated = false;
@@ -18,8 +22,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }, err => {
       console.log(err);
     });
-
-
   }
 
   ngOnInit() {
@@ -42,7 +44,3 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 }
-import {UserService} from '../services/user.service';
-import {Router} from '@angular/router';
-
-import {Subscription} from 'rxjs';

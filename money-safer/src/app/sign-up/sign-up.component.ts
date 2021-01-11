@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidatorFn, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidatorFn, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {CountriesService} from '../services/countries.service';
 import {UserService} from '../services/user.service';
@@ -15,6 +15,7 @@ export class SignUpComponent implements OnInit {
   userRegistrationForm: FormGroup;
   countriesList;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
+
   userObject = {
     username: String,
     first_name: String,
@@ -117,7 +118,7 @@ export class SignUpComponent implements OnInit {
       this.router.navigate(['/login']);
     },  error => {
       console.log(error);
-    })
+    });
   }
 
 }

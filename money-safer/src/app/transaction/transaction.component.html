@@ -12,21 +12,29 @@
     </mat-form-field>
 
 
-      <mat-radio-group aria-label="Select an option" formControlName="transactionType">
-        <mat-radio-button value="1">Income</mat-radio-button>
-        <mat-radio-button value="0">Outcome</mat-radio-button>
+      <mat-radio-group aria-label="Select an option"  id="transactionType" formControlName="transactionType">
+        <mat-radio-button id="inflow" value="1">Inflow</mat-radio-button>
+        <mat-radio-button value="0">Outflow</mat-radio-button>
       </mat-radio-group>
 
-
     <mat-form-field>
-      <mat-label>Country</mat-label>
-      <mat-select formControlName="transactionCategory">
-        <mat-option *ngFor="let category of transactionCategoriesList" [value]="category.id">
+      <mat-label>Transaction type</mat-label>
+      <mat-select id="transactionCategory" formControlName="transactionCategory">
+        <mat-option *ngFor="let category of transactionCategoriesList"
+                    [value]="category.id"
+                    id="category.category_name"
+        >
           {{category.category_name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button [disabled]="transactionForm.invalid" (click)="InsertTransaction()">Insert Transaction</button>
+    <button mat-raised-button
+            [disabled]="transactionForm.invalid"
+            (click)="InsertTransaction()"
+            id="InsertTransaction"
+    >
+      Insert Transaction
+    </button>
 
   </form>
 </mat-card>
