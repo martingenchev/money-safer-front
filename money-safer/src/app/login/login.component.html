@@ -1,27 +1,83 @@
-<mat-card>
-  <form [formGroup]="userLogForm" novalidate>
 
-    <div formGroupName="emailGroup">
-      <mat-form-field>
-        <input matInput placeholder="Email address" type="email" formControlName="email">
-        <mat-error>
-          {{errorMessages.email}}
-        </mat-error>
-      </mat-form-field>
-    </div>
+<div class="login-wrap">
 
-    <div formGroupName="passwordGroup">
-      <mat-form-field>
-        <input matInput placeholder="Password" type="password" formControlName="password">
-        <mat-error>
-          {{errorMessages.password}}
-        </mat-error>
-      </mat-form-field>
 
-    </div>
+<div
+class="form-wrap"
+>
+  <svg width="163" height="94" viewBox="0 0 163 94" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <rect width="163" height="94" fill="url(#pattern0)"/>
+    <defs>
+      <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+        <use xlink:href="#image0" transform="translate(0 -0.358974) scale(0.005 0.00865385)"/>
+      </pattern>
+      <image id="image0" width="200" height="200" xlink:href="data:image/png;base64,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"/>
+    </defs>
+  </svg>
+  <h2 class="login-header">Log in</h2>
+  <mat-card>
+    <form [formGroup]="userLogForm"
+          novalidate
+          class="form-group"
+    >
 
-    <button mat-raised-button [disabled]="userLogForm.invalid" (click)="Log_in()">Log in</button>
+      <div formGroupName="emailGroup"
+            class="input-wrap"
+      >
+        <label for="email">Email address</label>
+        <mat-form-field>
+          <input matInput
+                 placeholder="name@domain.com"
+                 type="email"
+                 formControlName="email"
+                 id="email"
+          >
+          <mat-error>
+            {{errorMessages.email}}
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-  </form>
-  <p>No registration?  <a routerLink="/sign-up" > Sign up </a></p>
-</mat-card>
+      <div formGroupName="passwordGroup"
+           class="input-wrap"
+      >
+        <label for="password">Password</label>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="at least 8 characters"
+            type="password"
+            id="password"
+            formControlName="password"
+          >
+          <mat-error>
+            {{errorMessages.password}}
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <button
+        mat-raised-button
+        [disabled]="userLogForm.invalid"
+        (click)="Log_in()"
+        class="button-primary-color login-button"
+      >
+        Log in
+      </button>
+
+    </form>
+    <p>Don't have account?  <a routerLink="/sign-up" class="link-button"> Sign up </a></p>
+  </mat-card>
+</div>
+
+<div class="image-wrap">
+  <img
+    class="img-front"
+    src="../../assets/Log_in.png"
+    alt="login"
+  >
+
+</div>
+
+</div>

@@ -1,2 +1,5 @@
-<app-menu *ngIf="authService.IsLogged()"></app-menu>
-<router-outlet></router-outlet>
+<div class="app-wrap">
+  <app-menu *ngIf="authService.IsLogged()"></app-menu>
+  <router-outlet></router-outlet>
+</div>
+

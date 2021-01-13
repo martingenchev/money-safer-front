@@ -1,4 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
-
+* {
+  box-sizing: border-box;
+  overflow: inherit;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.button-primary-color{
+  background: #7ED098;
+  border-radius: 10px;
+  color: #ffffff;
+  font-family: 'Roboto';
+}
+
+.button-primary-color:disabled{
+  background: #7ED098;
+  color: #ffffff;
+  font-family: 'Roboto';
+}
+.link-button{
+  color: #7ED098;
+}

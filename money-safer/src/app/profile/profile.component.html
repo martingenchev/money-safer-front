@@ -1,6 +1,10 @@
 
 <mat-card>
-  <form [formGroup]="userRegistrationForm" novalidate>
+  <form
+    [formGroup]="userRegistrationForm"
+    novalidate
+    class="profile-form"
+  >
 
     <mat-form-field>
       <input matInput placeholder="Username" value=" {{userData.username}}" type="text" formControlName="userName">
@@ -8,7 +12,7 @@
         {{errorMessages.fullName}}
       </mat-error>
     </mat-form-field>
-    <div formGroupName="nameGroup">
+    <div formGroupName="nameGroup" class="input-wrap">
       <mat-form-field>
         <input matInput placeholder="First name" value="{{userData.first_name}}" type="text" formControlName="firstName">
         <mat-error>
@@ -25,44 +29,62 @@
     </div>
 
 
+    <div
+    class="input-wrap"
+    >
+      <mat-form-field>
+        <input matInput value="{{userData.adress}}" placeholder="Adress" type="text" formControlName="adress" [errorStateMatcher]="confirmValidParentMatcher">
+        <mat-error>
+          {{errorMessages.address}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{userData.Country.country_name}}</mat-label>
+        <mat-select formControlName="country_id">
+          <mat-option *ngFor="let country of countriesList" [value]="country.id">
+            {{country.country_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+<div>
+  <mat-form-field>
+    <input matInput placeholder="Current Password" type="password" formControlName="Oldpassword">
+    <mat-error>
+      {{errorMessages.password}}
+    </mat-error>
+  </mat-form-field>
+  <div
+    formGroupName="passwordGroup"
+    class="password-group-wrap input-wrap"
+  >
     <mat-form-field>
-      <input matInput placeholder="Current Password" type="password" formControlName="Oldpassword">
+      <input matInput placeholder="New Password" type="password" formControlName="password">
       <mat-error>
         {{errorMessages.password}}
       </mat-error>
     </mat-form-field>
-    <div formGroupName="passwordGroup">
-      <br>
-      <mat-form-field>
-        <input matInput placeholder="New Password" type="password" formControlName="password">
-        <mat-error>
-          {{errorMessages.password}}
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput placeholder="Confirm password" type="password" formControlName="confirmPassword" [errorStateMatcher]="confirmValidParentMatcher">
-        <mat-error>
-          {{errorMessages.confirmPassword}}
-        </mat-error>
-      </mat-form-field>
-    </div>
     <mat-form-field>
-      <input matInput value="{{userData.adress}}" placeholder="Adress" type="text" formControlName="adress" [errorStateMatcher]="confirmValidParentMatcher">
+      <input matInput placeholder="Confirm password" type="password" formControlName="confirmPassword" [errorStateMatcher]="confirmValidParentMatcher">
       <mat-error>
-        {{errorMessages.address}}
+        {{errorMessages.confirmPassword}}
       </mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>{{userData.Country.country_name}}</mat-label>
-      <mat-select formControlName="country_id">
-        <mat-option *ngFor="let country of countriesList" [value]="country.id">
-          {{country.country_name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+</div>
+
+
+
+    </div>
     <br>
-    <button mat-raised-button [disabled]="userRegistrationForm.invalid" (click)="updateUser()">Update profile</button>
+    <button
+      mat-raised-button
+      class="button-primary-color"
+      [disabled]="userRegistrationForm.invalid"
+      (click)="updateUser()"
+
+
+    >Update profile</button>
 
   </form>
 </mat-card>

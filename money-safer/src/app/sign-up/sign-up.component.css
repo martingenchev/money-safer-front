@@ -4,3 +4,49 @@
   align-items: center;
   height: 100%;
 }
+
+.signup-wrap{
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+.form-wrap {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.image-wrap{
+  width: 70%;
+  justify-content: center;
+  display: flex;
+  align-content: center;
+  height: 100%;
+}
+.input-wrap{
+  display: flex;
+  flex-direction: column;
+}
+.input-wrap-group{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.login-button{
+  width: 100%;
+}
+.button-primary-color{
+  background: #7ED098;
+  border-radius: 10px;
+  color: #ffffff;
+  font-family: 'Roboto';
+}
+
+.button-primary-color:disabled{
+  color: #ffffff;
+  font-family: 'Roboto';
+}
+.img-front{
+  width: 100%;
+}
