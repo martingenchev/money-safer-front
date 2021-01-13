@@ -5,6 +5,9 @@ import {AuthService} from '../services/auth.service';
 import {TransactionsService} from '../services/transactions.service';
 import {Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { ChartType, ChartOptions  } from 'chart.js';
+import { MultiDataSet, Label,  } from 'ng2-charts';
+
 
 class DialogData {
   id: number;
@@ -19,7 +22,9 @@ export class DashboardComponent implements OnInit {
   // declarying table columns and datasource
   displayedColumns: string[] = ['Id', 'Transaction Category', 'createdAt', 'Transaction type', 'Amount',  'menu'];
   dataSource ;
-  TransactionId;
+  private pieChartData: (any | number)[];
+  private IncomeTransaction;
+  private OutcomeTransaction: any[];
 
   constructor(private userService: UserService,
               private authService: AuthService,
@@ -29,10 +34,92 @@ export class DashboardComponent implements OnInit {
 
     this.dataSource =  this.transactionsService.getTransactions();
     console.log(this.dataSource );
+
   }
+  // pie chart
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+    legend: {
+      position: 'bottom',
+    }
+  };
+  public pieChartLabels = ['Salary', 'Rent', 'Savings', 'Housing', 'Utilities', 'Transportation', 'Entertainment', 'Other'];
+  public pieChartType = 'pie';
+
+
+  // bar chart
+
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  public barChartLabels = ['2019', '2020', '2021'];
+  public barChartType = 'bar';
+  public barChartLegend = true;
+  private barChartData;
 
   ngOnInit() {
+    this.pieChartData = [
+      this.filterTransactionAndSum(this.dataSource, 'Salary'),
+      this.filterTransactionAndSum(this.dataSource, 'Rent'),
+      this.filterTransactionAndSum(this.dataSource, 'Savings'),
+      this.filterTransactionAndSum(this.dataSource, 'Housing'),
+      this.filterTransactionAndSum(this.dataSource, 'Utilities'),
+      this.filterTransactionAndSum(this.dataSource, 'Transportation'),
+      this.filterTransactionAndSum(this.dataSource, 'Entertainment'),
+      this.filterTransactionAndSum(this.dataSource, 'Other'),
+      ];
+    this.IncomeTransaction = this.FilterTransactionsByCategory(this.dataSource, true);
+    this.OutcomeTransaction = this.FilterTransactionsByCategory(this.dataSource, false);
+    this.barChartData = [
+      {data: [
+          this.filterTransactionsByYearAndSum(this.IncomeTransaction, 2019),
+          this.filterTransactionsByYearAndSum(this.IncomeTransaction, 2020),
+          this.filterTransactionsByYearAndSum(this.IncomeTransaction, 2021)
+        ], label: 'Income'},
+      {data: [
+          this.filterTransactionsByYearAndSum(this.OutcomeTransaction, 2019),
+          this.filterTransactionsByYearAndSum(this.OutcomeTransaction, 2020),
+          this.filterTransactionsByYearAndSum(this.OutcomeTransaction, 2021)
+        ], label: 'Outcome'}
+    ];
+  }
 
+  filterTransactionAndSum(arrayToFilter: Array<any>, categoryType: string) {
+    const valuesArray = [];
+    const filteredArray = arrayToFilter.filter( transaction => {
+     if (transaction.Transactions_category.category_name === categoryType) {
+       valuesArray.push(transaction.amount);
+     }
+    });
+    const sumedValues = this.sumCategoryValues(valuesArray)
+    return sumedValues;
+  }
+
+  sumCategoryValues(ValuesArray: Array<number>) {
+    const sum = ValuesArray.reduce((a, b) => {
+      return a + b;
+    }, 0);
+    return sum;
+  }
+
+  FilterTransactionsByCategory(arrayToFilter: Array<any>, transactionType: boolean) {
+    const filteredArray = arrayToFilter.filter( transaction => {
+     return transaction.transaction_type === transactionType;
+    });
+    return filteredArray;
+  }
+
+  filterTransactionsByYearAndSum(arrayToFilter: Array<any>, yearToFilter: number) {
+    const valuesArray = [];
+    const yearTransactions = arrayToFilter.filter(transaction => {
+      const [year, month] = transaction.createdAt.split('-'); // Or, var month = e.date.split('-')[1];
+      if (year == yearToFilter) {
+        valuesArray.push(transaction.amount);
+      }
+    });
+    const sumedValues = this.sumCategoryValues(valuesArray)
+    return sumedValues;
   }
 
   updateTransaction(el) {
@@ -54,9 +141,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 }
-
-
-
 
 @Component({
   selector: 'dialog-delete-transaction',

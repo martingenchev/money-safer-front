@@ -27,8 +27,8 @@ import { EditTransactionComponent } from './edit-transaction/edit-transaction.co
 import {MatDialogModule} from '@angular/material/dialog';
 import {TransactionsService} from './services/transactions.service';
 import {MatMenuModule} from '@angular/material/menu';
-import {MatIconModule} from "@angular/material/icon";
-
+import {MatIconModule} from '@angular/material/icon';
+import { ChartsModule, ThemeService } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -58,10 +58,11 @@ import {MatIconModule} from "@angular/material/icon";
     MatTableModule,
     MatDialogModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    ChartsModule
   ],
   entryComponents: [DialogDeleteTransaction],
-  providers: [CountriesService, UserService, AuthService, AuthGuard, TransactionsService , {
+  providers: [ThemeService, CountriesService, UserService, AuthService, AuthGuard, TransactionsService , {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,
     multi: true

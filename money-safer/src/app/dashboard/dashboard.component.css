@@ -1,9 +1,26 @@
 table {
-  width: 90%;
+  width: 100%;
 }
 :host(app-dashboard){
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: 20px;
+}
+.chart-diagram{
+  width: 400px !important;
+  height: 200px !important;
+}
+.table-wrap{
+  width: 100%;
+  margin-top: 20px;
+  align-self: center;
+}
+.pie-chart-wrap{
+  width: 50%;
+}
+.diagram-wrap{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
