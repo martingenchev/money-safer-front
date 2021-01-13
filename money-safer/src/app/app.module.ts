@@ -26,6 +26,9 @@ import {AuthInterceptorService} from './auth/auth-interceptor.service';
 import { EditTransactionComponent } from './edit-transaction/edit-transaction.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {TransactionsService} from './services/transactions.service';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from "@angular/material/icon";
+
 
 @NgModule({
   declarations: [
@@ -53,7 +56,9 @@ import {TransactionsService} from './services/transactions.service';
     MatSelectModule,
     MatRadioModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule,
+    MatIconModule
   ],
   entryComponents: [DialogDeleteTransaction],
   providers: [CountriesService, UserService, AuthService, AuthGuard, TransactionsService , {

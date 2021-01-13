@@ -17,7 +17,7 @@ class DialogData {
 })
 export class DashboardComponent implements OnInit {
   // declarying table columns and datasource
-  displayedColumns: string[] = ['Id', 'Transaction type', 'Transaction Category', 'Amount', 'Edit', 'Delete'];
+  displayedColumns: string[] = ['Id', 'Transaction Category', 'createdAt', 'Transaction type', 'Amount',  'menu'];
   dataSource ;
   TransactionId;
 

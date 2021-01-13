@@ -23,6 +23,7 @@
     "@angular/router": "~8.2.14",
     "@nebular/eva-icons": "4.6.0",
     "@nebular/theme": "^4.6.0",
+    "chart.js": "^2.9.4",
     "eva-icons": "^1.1.2",
     "jwt-decode": "^2.2.0",
     "rxjs": "~6.4.0",
