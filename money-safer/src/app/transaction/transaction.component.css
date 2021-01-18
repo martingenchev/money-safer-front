@@ -15,3 +15,17 @@ mat-radio-group{
   justify-content: space-evenly;
 }
 
+#transactionType{
+  width: 45%;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  border-radius: 15px;
+}
+.mat-button-toggle-checked{
+  background-color: #7ED098 !important;
+
+}
+.mat-button-toggle-group-appearance-standard, .mat-button-toggle-standalone.mat-button-toggle-appearance-standard {
+   border: none !important;
+}

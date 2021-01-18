@@ -29,6 +29,7 @@ import {TransactionsService} from './services/transactions.service';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import { ChartsModule, ThemeService } from 'ng2-charts';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ChartsModule, ThemeService } from 'ng2-charts';
     MatDialogModule,
     MatMenuModule,
     MatIconModule,
-    ChartsModule
+    ChartsModule,
+    MatButtonToggleModule
   ],
   entryComponents: [DialogDeleteTransaction],
   providers: [ThemeService, CountriesService, UserService, AuthService, AuthGuard, TransactionsService , {

@@ -1,8 +1,14 @@
-
-
 <mat-card>
   <form [formGroup]="transactionForm" novalidate>
 
+    <mat-button-toggle-group
+      aria-label="Select an option"
+      id="transactionType"
+      formControlName="transactionType"
+    >
+      <mat-button-toggle id="inflow" value="1">Inflow</mat-button-toggle>
+      <mat-button-toggle value="0">Outflow</mat-button-toggle>
+    </mat-button-toggle-group>
 
     <mat-form-field>
       <input matInput placeholder="Insert Amount" type="text" formControlName="amounts" [errorStateMatcher]="confirmValidParentMatcher">
@@ -10,12 +16,6 @@
         {{errorMessages.amount}}
       </mat-error>
     </mat-form-field>
-
-
-      <mat-radio-group aria-label="Select an option"  id="transactionType" formControlName="transactionType">
-        <mat-radio-button id="inflow" value="1">Inflow</mat-radio-button>
-        <mat-radio-button value="0">Outflow</mat-radio-button>
-      </mat-radio-group>
 
     <mat-form-field>
       <mat-label>Transaction type</mat-label>

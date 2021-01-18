@@ -24,3 +24,6 @@ table {
   display: flex;
   justify-content: space-between;
 }
+.column-chart-wrap{
+  width: 45%;
+}
